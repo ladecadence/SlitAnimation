@@ -1,0 +1,4 @@
+github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e h1:wSQCJiig/QkoUnpvelSPbLiZNWvh2yMqQTQvIQqSUkU=
+github.com/andlabs/ui v0.0.0-20200610043537-70a69d6ae31e/go.mod h1:5G2EjwzgZUPnnReoKvPWVneT8APYbyKkihDVAHUi0II=
+github.com/pwiecz/go-fltk v0.0.0-20230924064308-597b69513d35 h1:layaB1Yj0yp8gcidQ7d1jSO0pZql7Ayocpm4Tce5aL4=
+github.com/pwiecz/go-fltk v0.0.0-20230924064308-597b69513d35/go.mod h1:uMK5daOr9p+ba2BPs5QadbfaqqrHR5TGj13yWGsAsmw=
