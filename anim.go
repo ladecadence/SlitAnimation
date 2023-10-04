@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"image"
 	"image/color"
@@ -8,12 +9,19 @@ import (
 	_ "image/jpeg"
 	"image/png"
 	"os"
-	"errors"
 
 	"github.com/pwiecz/go-fltk"
 )
 
 // IMAGE FUNCTIONS
+
+func imageSize(img image.Image) (int, int) {
+	if img == nil {
+		return 0, 0
+	}
+	return img.Bounds().Max.X, img.Bounds().Max.Y
+}
+
 func openImage(path string) (image.Image, error) {
 	// open image
 	f, err := os.Open(path)
@@ -41,14 +49,13 @@ func generate_anim(files []string, path string, bar_width int) error {
 	img, err := openImage(files[0])
 	if err != nil {
 		fmt.Printf("Error opening image %s\n", files[0])
-		return errors.New("Error opening image") 
+		return errors.New("Error opening image")
 		//os.Exit(1)
 	}
 	images = append(images, img)
 
 	// save size
-	width := images[0].Bounds().Max.X
-	height := images[0].Bounds().Max.Y
+	width, height := imageSize(images[0])
 	fmt.Printf("Image: w:%d, h:%d\n", width, height)
 
 	// check bars
@@ -176,7 +183,7 @@ func main() {
 		}
 		list_imgs = append(list_imgs, nfc.Filenames()...)
 		fmt.Printf("%v\n", list_imgs)
-		
+
 	})
 
 	button_clear := fltk.NewButton(210, 285, 185, 20, "Clear")
@@ -213,13 +220,13 @@ func main() {
 				if err != nil {
 					fltk.MessageBox("Error", err.Error())
 				} else {
-					fltk.MessageBox("Ok", "Animation generated on " + nfc.Filenames()[0])
+					fltk.MessageBox("Ok", "Animation generated on "+nfc.Filenames()[0])
 				}
 			}
 		} else {
-			fltk.MessageBox("Error", "Need at least two images")				
+			fltk.MessageBox("Error", "Need at least two images")
 		}
-	}) 
+	})
 
 	win.End()
 	win.Show()
